@@ -1,4 +1,4 @@
-import { AppRoutingModule } from '../app-routing.module';
+// import { AppRoutingModule } from '../app-routing.module';
 import { Component,OnInit,ViewEncapsulation } from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {PasswordModule} from 'primeng/password';
@@ -40,8 +40,9 @@ export class MenuComponent {
       {
         label:'หน้าแรก',
         icon:'pi pi-fw pi-bookmark',
-        // routerLink: ['/']
-        url:'http://www.google.com'
+        routerLink: ['/']
+        // url:'http://www.google.com'
+        // "routerLink": "['']"
       },
         {
            label:'นำไฟล์ขึ้นเว็บ',
