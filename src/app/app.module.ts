@@ -1,7 +1,8 @@
+import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 
 import {InputTextModule} from 'primeng/inputtext';
@@ -13,13 +14,21 @@ import {PasswordModule} from 'primeng/password';
 import {ButtonModule} from 'primeng/button';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
-
+import {AccordionModule} from 'primeng/accordion';
+import { MenuComponent } from './menu/menu.component';
+import { IndexComponent } from './index/index.component';
+import { RegisterComponent } from './register/register.component';
+import { FooterComponent } from './footer/footer.component';     //accordion and accordion tab
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MenuComponent,
+    IndexComponent,
+    RegisterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +39,8 @@ import {AccordionModule} from 'primeng/accordion';     //accordion and accordion
     PasswordModule,
     ButtonModule,
     BrowserAnimationsModule,
-    AccordionModule
+    AccordionModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
