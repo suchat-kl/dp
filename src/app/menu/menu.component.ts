@@ -40,7 +40,8 @@ export class MenuComponent {
       {
         label:'หน้าแรก',
         icon:'pi pi-fw pi-bookmark',
-        routerLink: ['/']
+        routerLink: ['/'] , 
+        queryParams: {'title': 'index'}
         // url:'http://www.google.com'
         // "routerLink": "['']"
       },
