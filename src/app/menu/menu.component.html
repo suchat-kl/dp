@@ -1,27 +1,65 @@
-
 <div class="container-fluid">
-    <p-menubar [model]="items">
-  
-      <div class="row" style="background-color: rgb(221, 226, 238);">
-        <div class="col-12 col-sm-4 mr-2 mt-4 mb-1 ">
-          <span class="p-float-label">
-            <input id="float-input" type="text" pInputText [(ngModel)]="userName" style="width:8rem ;" >
-            <label for="float-input">ชื่อผู้ใช้งาน</label>
-          </span>
-        </div>
-        <div class="col-12 col-sm-4 mr-1 mt-4 mb-1">
-          <p-password [(ngModel)]="password" placeholder="รหัสผ่าน" [toggleMask]="true"  ></p-password>
-        
-         
-  
-        </div>
-        <div class="col-12 col-sm-4 mt-4 mb-1"> 
-          <button pButton pRipple type="button" label="เข้าระบบ" class="p-button-rounded"><i class="fa fa-sign-in" aria-hidden="true"></i>
-            </button>                    
-          
-          </div>
-                         
+  <form #userForm="ngForm" (ngSubmit)="onclick(userForm.value)">
+  <p-menubar [model]="items">
+   
+    <div class="row" style="background-color: rgb(221, 226, 238);">
+      <div class="col-12 col-sm-4 mr-2 mt-4 mb-1 ">
+        <span class="p-float-label">
+          <!-- [(ngModel)]="userName" -->
+          <input id="userName" name="userName" type="text" pInputText ngModel required minlength="3"
+            style="width:8rem ;" #userName="ngModel">
+          <label for="userName">ชื่อผู้ใช้งาน</label>
+        </span>
       </div>
-  
-    </p-menubar>
-  </div>
+      <div class="col-12 col-sm-4 mr-1 mt-4 mb-1">
+        <p-password placeholder="รหัสผ่าน" id="password" name="password" #password="ngModel" [toggleMask]="true" ngModel
+          required minlength="3">
+        </p-password>
+
+      </div>
+      <div class="col-12 col-sm-4 mt-4 mb-1">
+        <button pButton pRipple type="submit" label="เข้าระบบ" 
+        [disabled]="!userForm.form.valid"
+        class="p-button-rounded"><i
+            class="fa fa-sign-in" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div *ngIf="userName.errors && (userName.dirty || userName.touched)" class="alert alert-danger">
+        <div [hidden]="!userName.errors.required">
+          
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>การบันทึกข้อมูล!</strong> ต้องบันทึกชื่อผู้ใช้งาน
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+       
+        <div [hidden]="!userName.errors.minlength">
+          
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>การบันทึกข้อมูล!</strong> ต้องบันทึกชื่อผู้ใช้งานความยาว 3 ตัวอักษรขึ้นไป
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">
+        <div [hidden]="!password.errors.required">
+          
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>การบันทึกข้อมูล!</strong> ต้องบันทึกรหัสผ่าน
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          
+        </div>
+        <div [hidden]="!password.errors.minlength">
+          
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>การบันทึกข้อมูล!</strong> ต้องบันทึกรหัสผ่านความยาว 3 ตัวอักษรขึ้นไป
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+ <p-toast position="top-center" key="tc"></p-toast>
+  </p-menubar>
+</form>
+</div>

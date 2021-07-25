@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute,RouterModule, Routes } from '@angular/router';
+import {YtServiceService} from '../yt-service.service'
 
 @Component({
   selector: 'app-register',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,private ytSv:YtServiceService) { }
 
   ngOnInit(): void {
+    this.route.queryParams
+    .subscribe(params => {      
+      this.ytSv.setTitle(params.title);
+    }
+  );
   }
-
 }

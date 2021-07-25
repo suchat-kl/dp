@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,RouterModule, Routes } from '@angular/router';
+// import {Title} from "@angular/platform-browser";
+import {YtServiceService} from '../yt-service.service'
+
 
 @Component({
   selector: 'app-index',
@@ -7,15 +10,18 @@ import { ActivatedRoute,RouterModule, Routes } from '@angular/router';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent implements OnInit {
-title:string="";
-  constructor(private route: ActivatedRoute) { }
+// title:string="";
+// private titleService:Title
+  constructor(private route: ActivatedRoute,private ytSv:YtServiceService) { }
 
   ngOnInit(): void {
     this.route.queryParams
     .subscribe(params => {
       // console.log(params); // { orderby: "price" }
-      this.title = params.title;
-      console.log(this.title); // price
+      // this.title = params.title;
+      // console.log(this.title); // price
+      //this.titleService.setTitle(this.title);
+      this.ytSv.setTitle(params.title);
     }
   );
   }

@@ -9,7 +9,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 
 import {MenubarModule} from 'primeng/menubar';
-import {MenuItem} from 'primeng/api';
+// import {MenuItem} from 'primeng/api';
 import {PasswordModule} from 'primeng/password';
 import {ButtonModule} from 'primeng/button';
 
@@ -20,8 +20,12 @@ import { IndexComponent } from './index/index.component';
 import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';     //accordion and accordion tab
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
-
+// import {Title} from "@angular/platform-browser";
+import {YtServiceService} from './yt-service.service';
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
+// import {MessagesModule} from 'primeng/messages';
+// import {MessageModule} from 'primeng/message';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,9 +44,15 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ButtonModule,
     BrowserAnimationsModule,
     AccordionModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ToastModule,
+    MessageService,
+    // MessagesModule,
+    // MessageModule,
   ],
-  providers: [],
+  providers: [YtServiceService,MessageService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+ // constructor(ytSv:YtServiceService){}
+ }
