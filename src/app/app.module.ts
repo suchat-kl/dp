@@ -12,7 +12,7 @@ import {MenubarModule} from 'primeng/menubar';
 // import {MenuItem} from 'primeng/api';
 import {PasswordModule} from 'primeng/password';
 import {ButtonModule} from 'primeng/button';
-
+import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AccordionModule} from 'primeng/accordion';
 import { MenuComponent } from './menu/menu.component';
@@ -22,8 +22,8 @@ import { FooterComponent } from './footer/footer.component';     //accordion and
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 // import {Title} from "@angular/platform-browser";
 import {YtServiceService} from './yt-service.service';
-import {ToastModule} from 'primeng/toast';
-import {MessageService} from 'primeng/api';
+// import {ToastModule} from 'primeng/toast';
+// import {MessageService} from 'primeng/api';
 // import {MessagesModule} from 'primeng/messages';
 // import {MessageModule} from 'primeng/message';
 @NgModule({
@@ -45,12 +45,13 @@ import {MessageService} from 'primeng/api';
     BrowserAnimationsModule,
     AccordionModule,
     FontAwesomeModule,
-    ToastModule,
-    MessageService,
+    HttpClientModule,
+    // ToastModule,
+    // MessageService,
     // MessagesModule,
     // MessageModule,
   ],
-  providers: [YtServiceService,MessageService],
+  providers: [YtServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

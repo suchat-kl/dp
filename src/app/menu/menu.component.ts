@@ -3,7 +3,12 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { PasswordModule } from 'primeng/password';
 import { UsrpwdForm } from '../usrpwd-form';
-import {MessageService} from 'primeng/api';
+import { HttpClient } from '@angular/common/http';
+import { LoginApi } from '../login-api';
+import { HttpHeaders } from '@angular/common/http';
+import { UserDetail } from '../user-detail';
+
+// import {MessageService} from 'primeng/api';
 // import {MessagesModule} from 'primeng/messages';
 // import {MessageModule} from 'primeng/message';
 
@@ -21,30 +26,106 @@ import {MessageService} from 'primeng/api';
        width: 9rem;
      }
    `],
-// providers: [MessageService]
+  // providers: [MessageService]
 })
 export class MenuComponent {
   // title = 'ดาวน์โหลดเอกสารภาษีประจำปี';
   // userName:any;
   // password="" ;
-  
+
   data: any;
-  constructor(private messageService: MessageService){}
-  showTopCenter() {
-    this.messageService.add({key: 'tc', severity:'warn', summary: 'Warn', detail: 'Message Content'});
-}
+  url: string = 'http://localhost:9999/login';
+  loginJson = {
+
+    "username": "inf",
+    "password": "doh123"
+
+  }
+  // response!: LoginApi;
+  constructor(private http: HttpClient) { }
+
   onclick(value: any): void {
-    this.showTopCenter();
+
     // console.log(JSON.stringify(value));
     this.data = JSON.stringify(value);
-    console.log(this.data);
+    // console.log(this.data);
 
     // console.log(value["userName"]);
     // console.log(value["password"]);
     let obj: UsrpwdForm = JSON.parse(this.data);
-    console.log(obj.userName);
-    console.log(obj.password);
+    // console.log(obj.userName);
+    // console.log(obj.password);
+    this.loginJson["username"] = obj.userName;
+    this.loginJson["password"] = obj.password;
+    this.logIn();
   }
+  // response: any;
+  // error: any;
+  token: string = "";
+  // logInApi: LoginApi | undefined;
+  async logIn() { //,{headers:""}
+    // logIn() {
+    let response = await this.http.post(this.url, this.loginJson).toPromise();
+    // let request = this.http.post(this.url, this.loginJson)
+    //   .subscribe(response => {
+    //     //console.log(JSON.stringify(response));
+    //     let j=JSON.stringify(response);
+    //     let obj2:LoginApi =JSON.parse(j) ;
+    //     console.log(obj2.accessToken);
+    //     //   this.token=j["accessToken"];
+    //     sessionStorage.setItem("token", obj2.accessToken);
+    //   }, error => {
+    //     console.log(JSON.stringify(error));
+    //   });
+
+    let j = JSON.stringify(response);
+    let obj2: LoginApi = JSON.parse(j);
+    sessionStorage.setItem("token", obj2.accessToken);
+console.log(obj2.accessToken);
+
+    // console.log(this.response["tokenType"]);
+    // console.log(this.response["accessToken"]);
+    // console.log("**************************");
+
+    // this.token +=this.response["accessToken"];
+
+
+    this.url = 'http://localhost:9999/user';
+    let header = {
+      headers: new HttpHeaders()
+        .set('Authorization', "Bearer " + sessionStorage.getItem("token")) //   this.response["accessToken"])
+    }
+    // this.response = await this.http.get(this.url, header).toPromise();
+    // console.log(this.response);
+    let request1 = this.http.get(this.url, header)
+      .subscribe(response => {
+        //console.log(JSON.stringify(response));
+        let j = JSON.stringify(response);
+        //console.log(j);
+        let obj2:UserDetail =JSON.parse(j) ;
+        // console.log(JSON.stringify(obj2))
+        console.log(obj2[0].email);
+        console.log(obj2[0].roles);
+        for (let index in obj2[0].roles){
+          // console.log(key);
+          console.log(obj2[0].roles[index].id);
+          //1 upload file menu
+          if (obj2[0].roles[index].id==2) { //permission upload file
+            this.items[1].disabled=false;
+          }
+        }
+      
+        //console.log(obj2.);
+        //   this.token=j["accessToken"];
+        //sessionStorage.setItem("token", obj2.accessToken);
+      }, error => {
+        console.log(JSON.stringify(error));
+      });
+
+
+  }
+
+
   items: MenuItem[] = [];
 
   // ngOnInit() {
@@ -76,6 +157,7 @@ export class MenuComponent {
       {
         label: 'นำไฟล์ขึ้นเว็บ',
         icon: 'pi pi-upload',
+        disabled: true,
         //   routerLink: ['/']
         //  items:[
         //     {
