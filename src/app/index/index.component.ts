@@ -13,7 +13,7 @@ export class IndexComponent implements OnInit {
   // title:string="";
   // private titleService:Title
   constructor(private route: ActivatedRoute, private ytSv: YtServiceService) { }
-
+// token:string="";
   ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => {
@@ -28,6 +28,11 @@ export class IndexComponent implements OnInit {
         else { this.ytSv.setTitle(params.title); }
       }
       );
+    // if (!sessionStorage.getItem("token")==null){
+        
+          // this.token= (localStorage.getItem('token') || '') ;
+          // console.log(this.token);
+   //  }
   }
 
 }

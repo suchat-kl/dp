@@ -1,6 +1,7 @@
 import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {DialogModule} from 'primeng/dialog';
 
 
 import { AppComponent } from './app.component';
@@ -9,7 +10,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 
 import {MenubarModule} from 'primeng/menubar';
-// import {MenuItem} from 'primeng/api';
+
 import {PasswordModule} from 'primeng/password';
 import {ButtonModule} from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,19 +21,24 @@ import { IndexComponent } from './index/index.component';
 import { RegisterComponent } from './register/register.component';
 import { FooterComponent } from './footer/footer.component';     //accordion and accordion tab
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-// import {Title} from "@angular/platform-browser";
+import { UserService } from './user.service';
 import {YtServiceService} from './yt-service.service';
-// import {ToastModule} from 'primeng/toast';
-// import {MessageService} from 'primeng/api';
-// import {MessagesModule} from 'primeng/messages';
-// import {MessageModule} from 'primeng/message';
+import { UploadFileComponent } from './upload-file/upload-file.component';
+import { DownloadFileComponent } from './download-file/download-file.component';
+import { ChangePwdComponent } from './change-pwd/change-pwd.component';
+import { ResetPwdComponent } from './reset-pwd/reset-pwd.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     IndexComponent,
     RegisterComponent,
-    FooterComponent
+    FooterComponent,
+    UploadFileComponent,
+    DownloadFileComponent,
+    ChangePwdComponent,
+    ResetPwdComponent
   ],
   imports: [
     BrowserModule,
@@ -46,12 +52,10 @@ import {YtServiceService} from './yt-service.service';
     AccordionModule,
     FontAwesomeModule,
     HttpClientModule,
-    // ToastModule,
-    // MessageService,
-    // MessagesModule,
-    // MessageModule,
+    DialogModule,
+    
   ],
-  providers: [YtServiceService],
+  providers: [YtServiceService,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
