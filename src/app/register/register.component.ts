@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
   password: string = "";
   idcard: string = "";
   msg_err: string="";
+ 
   // data: any;
   constructor(private routeA: ActivatedRoute, private ytSv: YtServiceService,
     private route: Router, private http: HttpClient) { }

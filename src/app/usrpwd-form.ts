@@ -1,4 +1,4 @@
 export interface UsrpwdForm {
-    userNameLogin:string;
-    passwordLogin:string;
+    userName:string;
+    password:string;
 }

@@ -6,13 +6,13 @@
           <div class="col-12 col-sm-4 mr-2 mt-4 mb-1 ">
             <span class="p-float-label">
               <!-- [(ngModel)]="userName" -->
-              <input id="userNameLogin" name="userNameLogin" type="text" pInputText ngModel required minlength="3"
+              <input id="userName" name="userName" type="text" pInputText ngModel required minlength="3"
                 style="width:8rem ;" #userName="ngModel">
-              <label for="usernameLogin">ชื่อผู้ใช้งาน</label>
+              <label for="username">ชื่อผู้ใช้งาน</label>
             </span>
           </div>
           <div class="col-12 col-sm-4 mr-1 mt-4 mb-1">
-            <p-password  placeholder="รหัสผ่าน" id="passwordLogin" name="passwordLogin" #password="ngModel" [toggleMask]="true"
+            <p-password  placeholder="รหัสผ่าน" id="password" name="password" #password="ngModel" [toggleMask]="true"
               ngModel required minlength="6">
             </p-password>
 

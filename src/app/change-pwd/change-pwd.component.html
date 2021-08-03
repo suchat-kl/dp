@@ -14,16 +14,16 @@
                 readonly
                 pInputText ngModel required minlength="3"
                   style="width:8rem ;" #userName="ngModel"> -->
-          <input id="userNameLogin" name="userNameLogin" type="text" readonly [(ngModel)]="userName" #userNamelocal="ngModel"
+          <input id="userName" name="userName" type="text" readonly [(ngModel)]="userName" #userNamelocal="ngModel"
             pInputText style="width:20rem ;">
 
-          <label for="userNameLogin">ชื่อผู้ใช้งาน</label>
+          <label for="userName">ชื่อผู้ใช้งาน</label>
         </span>
       </div>
     </div>
     <div class="row" style="background-color: rgb(221, 226, 238);">
       <div class="col-12 col-sm-4  mt-4 mb-1">
-        <p-password placeholder="รหัสผ่าน" id="passwordLogin" name="passwordLogin" #password="ngModel" [toggleMask]="true" ngModel
+        <p-password placeholder="รหัสผ่าน" id="password" name="password" #password="ngModel" [toggleMask]="true" ngModel
           required minlength="6">
         </p-password>
       </div>

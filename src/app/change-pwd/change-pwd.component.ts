@@ -44,7 +44,7 @@ export class ChangePwdComponent implements OnInit {
       "password": "doh123",
       "idcard": "0000000000006"
     }
-    body["password"] = obj.passwordLogin;
+    body["password"] = obj.password;
     console.log(body);
     let url = 'http://dbdoh.doh.go.th:9999/changepwd/' + sessionStorage
     .getItem('id');

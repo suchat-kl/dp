@@ -106,8 +106,8 @@ export class MenuComponent {
 
     // console.log(obj.userName);
     // console.log(obj.password);
-    this.loginJson["username"] = obj.userNameLogin;
-    this.loginJson["password"] = obj.passwordLogin;
+    this.loginJson["username"] = obj.userName;
+    this.loginJson["password"] = obj.password;
     this.logIn();
 
   }
