@@ -46,8 +46,8 @@ export class MenuComponent {
 
   }
   // response!: LoginApi;
-  constructor(private http: HttpClient, private route: Router,private usr:UserService
-    ) {
+  constructor(private http: HttpClient, private route: Router, private usr: UserService
+  ) {
     if (sessionStorage.getItem('userName') == null) {
       sessionStorage.setItem('userName', '');
     }
@@ -67,7 +67,7 @@ export class MenuComponent {
     //   sessionStorage.setItem("mnuResetPwd", "true");
     // }
   }
- 
+
   logOut() {
     this.passLogin = false;
     sessionStorage.removeItem("userName");
@@ -80,12 +80,12 @@ export class MenuComponent {
     this.showMenu();
     this.route.navigate(['/register']);
     this.route.navigate(['']);
-    this.usr.userName="";
+    this.usr.userName = "";
   }
   onclick(value: any): void {
     if (this.passLogin) {
       this.logOut();
-     
+
       return;
     }
     // else {
@@ -97,7 +97,7 @@ export class MenuComponent {
 
     // console.log(JSON.stringify(value));
     this.data = JSON.stringify(value);
-   console.log(this.data);
+   // console.log(this.data);
 
     // console.log(value["userName"]);
     // console.log(value["password"]);
@@ -126,7 +126,7 @@ export class MenuComponent {
           let obj2: LoginApi = JSON.parse(j);
           sessionStorage.setItem("token", obj2.accessToken);
           sessionStorage.setItem('passLogin', 'true');
-         
+
         });
 
     }
@@ -182,12 +182,12 @@ export class MenuComponent {
         // console.log(JSON.stringify(obj2))
         // this.obj3=response;
         sessionStorage.setItem('userName', obj2[0].username);
-        sessionStorage.setItem('id',(obj2[0].id).toString());
+        sessionStorage.setItem('id', (obj2[0].id).toString());
         // this.usr.userName=obj2[0].username;
         // console.log(this.usr.userName);
         // this.userName=sessionStorage.getItem('userName')+"";
-// console.log(obj2[0].username);
-// console.log(sessionStorage.getItem('userName'));
+        // console.log(obj2[0].username);
+        // console.log(sessionStorage.getItem('userName'));
         // console.log(obj2[0].email);
         // console.log(obj2[0].roles);
         for (let index in obj2[0].roles) {
@@ -236,24 +236,25 @@ export class MenuComponent {
   //           {label: 'Recent Files', icon: 'pi pi-download', routerLink: ['/pagename'], queryParams: {'recent': 'true'}}
   //       ]
   //   }
+  //routerLinkActiveOptions:  { exact: true }
   passLogin = false;
   userNameShow: string = '';
   showMenu() {
     this.passLogin = (sessionStorage.getItem("passLogin") === 'true');
     // this.userName =  sessionStorage.getItem('userName')+"" ;
     // console.log(this.userName);
-    this.userNameShow=  sessionStorage.getItem('userName')+"";
+    this.userNameShow = sessionStorage.getItem('userName') + "";
     let uploadFile = (sessionStorage.getItem("mnuFileUpload") === 'true');
     let downloadFile = (sessionStorage.getItem("mnuFileDownload") === 'true');
     let changePwd = (sessionStorage.getItem("mnuChangePwd") === 'true');
-    let resetPwd = (sessionStorage.getItem("mnuResetPwd") === 'true');
+    //let resetPwd = (sessionStorage.getItem("mnuResetPwd") === 'true');
     this.items = [
       {
         label: 'หน้าแรก',
         icon: 'pi pi-fw pi-bookmark',
         routerLink: ['/'],
         queryParams: { 'title': this.mnuStr[0]["index"] },
-
+        
 
       },
       {
@@ -262,7 +263,7 @@ export class MenuComponent {
         disabled: uploadFile,
         routerLink: ['/uploadfile'],
         queryParams: { 'title': this.mnuStr[2]["upload"] },
-
+        
 
       },
       {
@@ -313,7 +314,7 @@ export class MenuComponent {
   mnuStr = [
     { "index": "ดาวน์โหลดเอกสารภาษีประจำปี" },
     { "register": "ลงทะเบียนผู้ใช้งาน" },
-    { "upload": "นำไฟล์ขึ้นเว็บ" },
+    { "upload": "เตรียมข้อมูลภาษี" },
     { "download": "ดาวน์โหลดไฟล์ภาษี" },
     { "changepwd": "เปลี่ยนรหัสผ่าน" },
     { "resetpwd": "กำหนดรหัสผ่านใหม่" },

@@ -15,14 +15,19 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 `]
 })
 export class ChangePwdComponent implements OnInit {
- // display: boolean = false;
+  // display: boolean = false;
   userName: string = "";
   data: any;
- 
+
   constructor(private routeA: ActivatedRoute, private ytSv: YtServiceService,
-    private usr: UserService, private route: Router,private http:HttpClient) { }
+    private usr: UserService, private route: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
+    if (!(sessionStorage.getItem("passLogin") === 'true')) {
+      this.route.navigate(['']);
+      return;
+    }
+
     this.userName = sessionStorage.getItem("userName") + "";
     // (<HTMLInputElement>document.getElementById("userName")).value=this.userNameShow;
     // console.log("html  "+(<HTMLInputElement>document.getElementById("userName")).value);
@@ -47,16 +52,16 @@ export class ChangePwdComponent implements OnInit {
     body["password"] = obj.password;
     console.log(body);
     let url = 'http://dbdoh.doh.go.th:9999/changepwd/' + sessionStorage
-    .getItem('id');
+      .getItem('id');
     let header = {
       headers: new HttpHeaders()
         .set('Authorization', "Bearer " + sessionStorage.getItem("token"))
     }
-    this.http.put(url,body, header)
-    .subscribe(response => {  
-      // console.log(response);    
-    this.route.navigate(['']);
-  } ) 
+    this.http.put(url, body, header)
+      .subscribe(response => {
+        // console.log(response);    
+        this.route.navigate(['']);
+      })
 
   }
-  }
+}

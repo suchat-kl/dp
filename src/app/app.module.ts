@@ -19,7 +19,7 @@ import {AccordionModule} from 'primeng/accordion';
 import { MenuComponent } from './menu/menu.component';
 import { IndexComponent } from './index/index.component';
 import { RegisterComponent } from './register/register.component';
-import { FooterComponent } from './footer/footer.component';     //accordion and accordion tab
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserService } from './user.service';
 import {YtServiceService} from './yt-service.service';
@@ -27,6 +27,8 @@ import { UploadFileComponent } from './upload-file/upload-file.component';
 import { DownloadFileComponent } from './download-file/download-file.component';
 import { ChangePwdComponent } from './change-pwd/change-pwd.component';
 import { ResetPwdComponent } from './reset-pwd/reset-pwd.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +36,7 @@ import { ResetPwdComponent } from './reset-pwd/reset-pwd.component';
     MenuComponent,
     IndexComponent,
     RegisterComponent,
-    FooterComponent,
+    
     UploadFileComponent,
     DownloadFileComponent,
     ChangePwdComponent,
@@ -53,7 +55,7 @@ import { ResetPwdComponent } from './reset-pwd/reset-pwd.component';
     FontAwesomeModule,
     HttpClientModule,
     DialogModule,
-    
+    ReactiveFormsModule
   ],
   providers: [YtServiceService,UserService],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { YtServiceService } from '../yt-service.service';
 
 @Component({
@@ -9,10 +10,15 @@ import { YtServiceService } from '../yt-service.service';
 })
 export class DownloadFileComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,private ytSv:YtServiceService) { }
+  constructor(private routeA: ActivatedRoute,private ytSv:YtServiceService,
+    private route: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.route.queryParams
+    if (!(sessionStorage.getItem("passLogin") === 'true')) {
+      this.route.navigate(['']);
+      return;
+    }
+    this.routeA.queryParams
     .subscribe(params => {      
       this.ytSv.setTitle(params.title);
     }
