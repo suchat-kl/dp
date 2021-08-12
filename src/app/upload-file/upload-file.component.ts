@@ -137,9 +137,12 @@ export class UploadFileComponent implements OnInit {
         .set('Authorization', "Bearer " + sessionStorage.getItem("token"))
       // .set('Content-Type', 'application/json')
       // .set('Accept', 'application/json')   
-      // .set('Access-Control-Allow-Origin', 'http://localhost:4200')
+      // .set('Access-Control-Allow-Origin', '*')
       // .set('Access-Control-Allow-Credentials', 'true')     
-      // .set( 'POST', 'DELETE')
+      // .set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+      // .set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
+
+      
     }
     // console.log(body);
 
