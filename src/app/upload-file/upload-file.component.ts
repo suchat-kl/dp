@@ -17,6 +17,7 @@ import { YtServiceService } from '../yt-service.service';
 })
 export class UploadFileComponent implements OnInit {
   disableInsert: boolean = true;
+  disableDelete: boolean = true;
   // sizeMax = false;
   // isTxt = false;
   sizeMaxFile = 5;
@@ -27,15 +28,15 @@ export class UploadFileComponent implements OnInit {
     m: string; n: string; o: string; p: string; q: string; r: string; s: string;
   } = {
       "xx": "", "a": "", "b": "", "c": "", "d": "", "e": "", "f": "", "g": "",
-       "h": "", "i": "", "j": "", "k": "",
+      "h": "", "i": "", "j": "", "k": "",
       "l": "", "m": "", "n": "",
       "o": "", "p": "", "q": "", "r": "", "s": ""
     };
-    jsonOutputArr : {
-      xx: string; a: string; b: string; c: string; d: string;
-      e: string; f: string; g: string; h: string; i: string; j: string; k: string; l: string;
-      m: string; n: string; o: string; p: string; q: string; r: string; s: string;
-    }[] =[];
+  jsonOutputArr: {
+    xx: string; a: string; b: string; c: string; d: string;
+    e: string; f: string; g: string; h: string; i: string; j: string; k: string; l: string;
+    m: string; n: string; o: string; p: string; q: string; r: string; s: string;
+  }[] = [];
   //   form: FormGroup = new FormGroup({
   //     title: new FormControl(''),
   //     description: new FormControl('')
@@ -100,7 +101,7 @@ export class UploadFileComponent implements OnInit {
       let data: any;
       for (const line of this.base64.split(/[\r\n]+/)) {
         data = line.split("$");
-        if ( data[10]==null || typeof data[10] === 'undefined'){ //yearTax
+        if (data[10] == null || typeof data[10] === 'undefined') { //yearTax
           continue;
         }
         // console.log(data); .push
@@ -112,12 +113,12 @@ export class UploadFileComponent implements OnInit {
           "s": data[19]
         });
 
-       // break;
+        // break;
         // console.log(data[6]);
         // console.log(JSON.stringify(data));
       }
       // console.log((this.jsonOutput));
-      this.disableInsert = false;
+      this.disableDelete = false;
     };
 
 
@@ -128,10 +129,10 @@ export class UploadFileComponent implements OnInit {
     // "fileName": this.yearTax,
     // "base64": this.base64,
     // "yeartax": this.yearTax,
-    
+if (!this.disableDelete) {
     let url = "http://dbdoh.doh.go.th:9999/delYT/" + this.yearTax;//+"?file="+this.fileGloblal;
-   
-    
+
+
     let header = {
       headers: new HttpHeaders()
         .set('Authorization', "Bearer " + sessionStorage.getItem("token"))
@@ -142,7 +143,7 @@ export class UploadFileComponent implements OnInit {
       // .set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
       // .set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
 
-      
+
     }
     // console.log(body);
 
@@ -155,7 +156,9 @@ export class UploadFileComponent implements OnInit {
           // let obj2: LoginApi = JSON.parse(j);
           // console.log(response);
           // console.log("success");
-
+          this.display = true; this.msg_err = "ลบข้อมูลเสร็จแล้ว....";
+          this.disableDelete=true;
+          this.disableInsert=false;
         });
 
     }
@@ -166,34 +169,45 @@ export class UploadFileComponent implements OnInit {
       console.log(err);
 
     }
+    
+    return;
+  } //delete
+
+
+
+if (!this.disableInsert){
     // console.log(body);
-    url = "http://dbdoh.doh.go.th:9999/insertTxt";
+  let  url = "http://dbdoh.doh.go.th:9999/insertTxt";
 
-for (let i=0;i<this.jsonOutputArr.length;i++){
-  this.jsonOutput=this.jsonOutputArr[i];
-    let body = this.jsonOutput;
-    try {//,header
-      await this.http.post(url, body).toPromise().
-        then(response => {
-          // let j = JSON.stringify(response);
-          // let obj2: LoginApi = JSON.parse(j);
-          // console.log(response);
-          // console.log("success");
-          //this.route.navigate(['']);
-          this.display = true; this.msg_err = "ประมวลผลเสร็จแล้ว....";
-        });
+    for (let i = 0; i < this.jsonOutputArr.length; i++) {
+      this.jsonOutput = this.jsonOutputArr[i];
+      let body = this.jsonOutput;
+      try {//,header
+        await this.http.post(url, body).toPromise().
+          then(response => {
+            // let j = JSON.stringify(response);
+            // let obj2: LoginApi = JSON.parse(j);
+            // console.log(response);
+            // console.log("success");
+            //this.route.navigate(['']);
+            this.display = true; this.msg_err = "เพิ่มข้อมูลจากไฟล์ข้อความเสร็จแล้ว....";
+            this.disableInsert=true;
+            this.disableDelete=true;
+          });
+
+      }
+      catch (err) {
+
+        // this.display = true;
+        console.log("error");
+        console.log(err);
+
+      }
+
 
     }
-    catch (err) {
 
-      // this.display = true;
-      console.log("error");
-      console.log(err);
-
-    }
-
-
-  }
+  }//insert
     // document.getElementById("file-id").files[0].name; 
     // let obj: UsrpwdForm = JSON.parse(this.data);
     //{"filetxt":"C:\\fakepath\\หนังสือรับรองภาษี 2563_New.txt"}
