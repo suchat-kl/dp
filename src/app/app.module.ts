@@ -28,6 +28,7 @@ import { DownloadFileComponent } from './download-file/download-file.component';
 import { ChangePwdComponent } from './change-pwd/change-pwd.component';
 import { ResetPwdComponent } from './reset-pwd/reset-pwd.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UploadImgComponent } from './upload-img/upload-img.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     UploadFileComponent,
     DownloadFileComponent,
     ChangePwdComponent,
-    ResetPwdComponent
+    ResetPwdComponent,
+    UploadImgComponent
   ],
   imports: [
     BrowserModule,

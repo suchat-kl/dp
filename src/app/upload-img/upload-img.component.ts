@@ -1,29 +1,23 @@
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { concat } from 'rxjs';
-
-
 import { YtServiceService } from '../yt-service.service';
 
 @Component({
-  selector: 'app-upload-file',
-  templateUrl: './upload-file.component.html',
-  styleUrls: ['./upload-file.component.css']
+  selector: 'app-upload-img',
+  templateUrl: './upload-img.component.html',
+  styleUrls: ['./upload-img.component.css']
 })
-export class UploadFileComponent implements OnInit {
+export class UploadImgComponent implements OnInit {
+
   disableInsert: boolean = true;
   disableDelete: boolean = true;
   //disableUpdate: boolean = true;
   // sizeMax = false;
   // isTxt = false;
-  sizeMaxFile = 5;
+  sizeMaxFile = 1;
   display: boolean = false; msg_err: string = "";
-  jsonOutput: {
+ /* jsonOutput: {
     xx: string; a: string; b: string; c: string; d: string;
     e: string; f: string; g: string; h: string; i: string; j: string; k: string; l: string;
     m: string; n: string; o: string; p: string; q: string; r: string; s: string;
@@ -38,15 +32,18 @@ export class UploadFileComponent implements OnInit {
     e: string; f: string; g: string; h: string; i: string; j: string; k: string; l: string;
     m: string; n: string; o: string; p: string; q: string; r: string; s: string;
   }[] = [];
+  */
   //   form: FormGroup = new FormGroup({
   //     title: new FormControl(''),
   //     description: new FormControl('')
   // })
+  //
   constructor(private routeA: ActivatedRoute, private ytSv: YtServiceService,
     private route: Router, private http: HttpClient
   ) { }
   base64: any; //dateNum: String = "";
   fileName: string = ""; yearTax: string = ""; fileSize: string = "";
+  selectedFile!: File;
   //fileGloblal: File | undefined;
   // maxSize=5*1024*1024;
   onChange = (event: Event) => {
@@ -54,51 +51,56 @@ export class UploadFileComponent implements OnInit {
     let dStr = "";
     const target = event.target as HTMLInputElement;
     const file: File = (target.files as FileList)[0];
+    this.selectedFile =file;
     this.display = false;
     //  this.fileGloblal = file;
     this.fileName = file.name;
     this.disableInsert = true;
     this.disableDelete = true;
     //console.log(file.type.toString());
-    if (!(file.type.toString() == "text/plain")) {
+    if (!(file.type.toString().startsWith("image/") )) {
       // alert("ต้องเลือกไฟล์ข้อความเท่านั้น");
-      this.display = true; this.msg_err = "ต้องเลือกไฟล์ข้อความเท่านั้น";
+      this.display = true; this.msg_err = "ต้องเลือกไฟล์รูปภาพเท่านั้น";
       return;
     }
-    let fname: string = "tax".concat(this.yearTax).concat(".txt");
+    /*let fname: string = "tax".concat(this.yearTax).concat(".txt");
     if (!(file.name == fname)) {
       //alert("ต้องใช้ชื่อไฟล์:  " + fname);
       this.display = true; this.msg_err = "ต้องใช้ชื่อไฟล์:  " + fname;
       return;
-    }
+    }*/
     // console.log(file.name);
     // console.log(this.fileName.substr(-3).toLowerCase());
     // this.isTxt = true;
-    if (!(this.fileName.substr(-3).toLowerCase() === "txt")) {
-      //  this.isTxt = false;
-      // alert("ต้องเลือกไฟล์ข้อความเท่านั้นนามสกุล txt");
-      this.display = true; this.msg_err = "ต้องเลือกไฟล์ข้อความเท่านั้นนามสกุล txt";
-      return;
-    }
+    // if (!(this.fileName.substr(-3).toLowerCase() === "txt")) {
+    //   //  this.isTxt = false;
+    //   // alert("ต้องเลือกไฟล์ข้อความเท่านั้นนามสกุล txt");
+    //   this.display = true; this.msg_err = "ต้องเลือกไฟล์ข้อความเท่านั้นนามสกุล txt";
+    //   return;
+    // }
     let fs = file.size / 1024 / 1024;
     // this.sizeMax = false;
     if (fs > this.sizeMaxFile) {
       //this.form.validator.
       //this.sizeMax = true;
       // alert("ขนาดเกิน 5 MB");
-      this.display = true; this.msg_err = "ขนาดเกิน 5 MB";
+      this.display = true; this.msg_err = "ขนาดเกิน 1 MB";
       return;
     }
     let s = (fs).toFixed(2).toString().concat(" MB");
     this.fileSize = "ขนาด " + s;
-    let reader = new FileReader();
+    
+
+
+
+   // let reader = new FileReader();
     // reader.readAsDataURL(file);
 
-    reader.readAsText(file);
+    // reader.readAsText(file);
     // let text = FS.readFileSync(file, 'utf-8');
     // let textByLine = text.split('\n')
 
-    reader.onload = () => {
+   /* reader.onload = () => {
       //reader.readAsText(file);
       this.base64 = reader.result;
       let data: any;
@@ -131,14 +133,15 @@ export class UploadFileComponent implements OnInit {
         // console.log(JSON.stringify(data));
       }
       // console.log((this.jsonOutput));
-      this.disableDelete = false;
-    };
+     
+    }; */
     //console.log(this.dateNum);
     //this.updateDateStr();
-    sessionStorage.removeItem("dStr");
-
+   // sessionStorage.removeItem("dStr");
+ this.disableDelete = false;
   };
-  updateDateStr() {
+  
+  /*updateDateStr() {
     let monthStr =
       [
         "มกราคม",
@@ -179,7 +182,7 @@ export class UploadFileComponent implements OnInit {
     return dStr;
 
 
-  }
+  }*/
   async onclick(value: any) {
     // let data = JSON.stringify(value);
     // console.log(data);
@@ -187,7 +190,7 @@ export class UploadFileComponent implements OnInit {
     // "base64": this.base64,
     // "yeartax": this.yearTax,
     if (!this.disableDelete) {
-      let url = "http://dbdoh.doh.go.th:9999/delYT/" + this.yearTax;//+"?file="+this.fileGloblal;
+      let url = "http://dbdoh.doh.go.th:9999/delImg/" + this.yearTax;//+"?file="+this.fileGloblal;
 
 
       let header = {
@@ -216,7 +219,7 @@ export class UploadFileComponent implements OnInit {
             this.display = true; this.msg_err = "ลบข้อมูลเสร็จแล้ว....";
             this.disableDelete = true;
             this.disableInsert = false;
-            
+           
           });
 
       }
@@ -235,13 +238,28 @@ export class UploadFileComponent implements OnInit {
 
     if (!this.disableInsert) {
       // console.log(body);
-      let url = "http://dbdoh.doh.go.th:9999/insertTxt";
+      let url = "http://dbdoh.doh.go.th:9999/uploadImg/"+ this.yearTax;
+      // let header = {
+      //   headers: new HttpHeaders()
+      //     .set('Authorization', "Bearer " + sessionStorage.getItem("token"))
+        // .set('Content-Type', 'application/json')
+        // .set('Accept', 'application/json')   
+        // .set('Access-Control-Allow-Origin', '*')
+        // .set('Access-Control-Allow-Credentials', 'true')     
+        // .set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+        // .set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
 
-      for (let i = 0; i < this.jsonOutputArr.length; i++) {
-        this.jsonOutput = this.jsonOutputArr[i];
-        let body = this.jsonOutput;
+
+    //  }
+
+   //   for (let i = 0; i < this.jsonOutputArr.length; i++) {
+        // this.jsonOutput = this.jsonOutputArr[i];
+        // let body = this.jsonOutput;
+        const uploadImageData = new FormData();
+        uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+        // let body="";
         try {//,header
-          await this.http.post(url, body).toPromise().
+          await this.http.post(url, uploadImageData).toPromise().
             then(response => {
               // let j = JSON.stringify(response);
               // let obj2: LoginApi = JSON.parse(j);
@@ -252,7 +270,7 @@ export class UploadFileComponent implements OnInit {
               
               this.disableInsert = true;
               this.disableDelete = true;
-              
+              return;
             });
 
         }
@@ -265,10 +283,8 @@ export class UploadFileComponent implements OnInit {
         }
 
 
-      }//for
+   //   }
 
-this.display = true; this.msg_err = "เพิ่มข้อมูลจากไฟล์ข้อความเสร็จแล้ว....";
-return;
     }//insert
     // document.getElementById("file-id").files[0].name; 
     // let obj: UsrpwdForm = JSON.parse(this.data);
@@ -278,7 +294,7 @@ return;
     //   this.display = true; this.msg_err = "ปรับปรุงข้อมูลจากไฟล์ข้อความเสร็จแล้ว....";
     //   this.disableUpdate = true;
     // }
-
+    this.display = true; this.msg_err = "เพิ่มข้อมูลจากไฟล์รูปภาพเสร็จแล้ว....";
   }
 
 

@@ -267,6 +267,15 @@ export class MenuComponent {
 
       },
       {
+        label: this.mnuStr[6]["uploadimg"],
+        icon: 'pi pi-upload',
+        disabled: uploadFile,
+        routerLink: ['/uploadimg'],
+        queryParams: { 'title': this.mnuStr[6]["uploadimg"] },
+        
+
+      },
+      {
         label: this.mnuStr[3]["download"],
         icon: 'pi pi-download',
         disabled: downloadFile,
@@ -318,6 +327,7 @@ export class MenuComponent {
     { "download": "ดาวน์โหลดไฟล์ภาษี" },
     { "changepwd": "เปลี่ยนรหัสผ่าน" },
     { "resetpwd": "กำหนดรหัสผ่านใหม่" },
+    {"uploadimg":"เตรียมไฟล์ลายเซ็นต์"},
   ];
   ngOnInit() {
     this.showMenu();
