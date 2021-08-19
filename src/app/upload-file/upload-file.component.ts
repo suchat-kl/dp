@@ -107,14 +107,14 @@ export class UploadFileComponent implements OnInit {
         if (data[10] == null || typeof data[10] === 'undefined') { //yearTax
           continue;
         }
-        if (data[16] == null || typeof data[16] === 'undefined' || data[16]==""  ||( (data[16] !="1") && (data[16] !="2"))       ) { //กบข กสจ or Not
-          data[16]="0";
+        if (data[16] == null || typeof data[16] === 'undefined' || data[16] == "" || ((data[16] != "1") && (data[16] != "2"))) { //กบข กสจ or Not
+          data[16] = "0";
         }
         if (sessionStorage.getItem("dStr") == null) {
           // this.dateNum = data[19];
           sessionStorage.setItem("dStr", data[19]);
           dStr = this.updateDateStr();
-         // alert("one");
+          // alert("one");
           //console.log(data[19]);
         }
         // console.log(data); .push
@@ -158,7 +158,7 @@ export class UploadFileComponent implements OnInit {
     // let i:number=0;
     // i=Number(this.dateNum.substring(2,4));
     let s = sessionStorage.getItem("dStr") + "";
-    
+
     let key: any = Number(s.substring(2, 4));
     // if (key===6){
     //   alert(key);
@@ -174,7 +174,7 @@ export class UploadFileComponent implements OnInit {
 
     //monthStr[6][this.dateNum.substring(2,4)]
     //console.log(key);
-    let dStr =  s.substring(0, 2) + " /  " + x + "  / " + s.substring(4) ;
+    let dStr = s.substring(0, 2) + " /  " + x + "  / " + s.substring(4);
 
     return dStr;
 
@@ -186,22 +186,23 @@ export class UploadFileComponent implements OnInit {
     // "fileName": this.yearTax,
     // "base64": this.base64,
     // "yeartax": this.yearTax,
+    let header = {
+      headers: new HttpHeaders()
+        .set('Authorization', "Bearer " + sessionStorage.getItem("token"))
+      // .set('Content-Type', 'application/json')
+      // .set('Accept', 'application/json')   
+      // .set('Access-Control-Allow-Origin', '*')
+      // .set('Access-Control-Allow-Credentials', 'true')     
+      // .set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+      // .set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
+
+
+    }
     if (!this.disableDelete) {
       let url = "http://dbdoh.doh.go.th:9999/delYT/" + this.yearTax;//+"?file="+this.fileGloblal;
 
 
-      let header = {
-        headers: new HttpHeaders()
-          .set('Authorization', "Bearer " + sessionStorage.getItem("token"))
-        // .set('Content-Type', 'application/json')
-        // .set('Accept', 'application/json')   
-        // .set('Access-Control-Allow-Origin', '*')
-        // .set('Access-Control-Allow-Credentials', 'true')     
-        // .set("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
-        // .set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
 
-
-      }
       // console.log(body);
 
 
@@ -216,7 +217,7 @@ export class UploadFileComponent implements OnInit {
             this.display = true; this.msg_err = "ลบข้อมูลเสร็จแล้ว....";
             this.disableDelete = true;
             this.disableInsert = false;
-            
+
           });
 
       }
@@ -228,7 +229,7 @@ export class UploadFileComponent implements OnInit {
 
       }
 
-      return; 
+      return;
     } //delete
 
 
@@ -249,10 +250,10 @@ export class UploadFileComponent implements OnInit {
               // console.log("success");
               //this.route.navigate(['']);
               // this.disableUpdate = false;
-              
+
               this.disableInsert = true;
               this.disableDelete = true;
-              
+
             });
 
         }
@@ -266,9 +267,10 @@ export class UploadFileComponent implements OnInit {
 
 
       }//for
-
-this.display = true; this.msg_err = "เพิ่มข้อมูลจากไฟล์ข้อความเสร็จแล้ว....";
-return;
+      this.disableInsert = true;
+      this.disableDelete = true;
+      this.display = true; this.msg_err = "เพิ่มข้อมูลจากไฟล์ข้อความเสร็จแล้ว....";
+      return;
     }//insert
     // document.getElementById("file-id").files[0].name; 
     // let obj: UsrpwdForm = JSON.parse(this.data);

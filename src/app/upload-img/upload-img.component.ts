@@ -239,9 +239,9 @@ export class UploadImgComponent implements OnInit {
     if (!this.disableInsert) {
       // console.log(body);
       let url = "http://dbdoh.doh.go.th:9999/uploadImg/"+ this.yearTax;
-      // let header = {
-      //   headers: new HttpHeaders()
-      //     .set('Authorization', "Bearer " + sessionStorage.getItem("token"))
+      let header = {
+        headers: new HttpHeaders()
+          .set('Authorization', "Bearer " + sessionStorage.getItem("token"))
         // .set('Content-Type', 'application/json')
         // .set('Accept', 'application/json')   
         // .set('Access-Control-Allow-Origin', '*')
@@ -250,7 +250,7 @@ export class UploadImgComponent implements OnInit {
         // .set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
 
 
-    //  }
+     }
 
    //   for (let i = 0; i < this.jsonOutputArr.length; i++) {
         // this.jsonOutput = this.jsonOutputArr[i];
@@ -259,7 +259,7 @@ export class UploadImgComponent implements OnInit {
         uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
         // let body="";
         try {//,header
-          await this.http.post(url, uploadImageData).toPromise().
+          await this.http.post(url, uploadImageData,header).toPromise().
             then(response => {
               // let j = JSON.stringify(response);
               // let obj2: LoginApi = JSON.parse(j);
