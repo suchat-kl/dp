@@ -258,6 +258,16 @@ export class MenuComponent {
 
       },
       {
+        label: this.mnuStr[7]["manual"],
+        icon: 'pi pi-fw pi-bookmark',
+        // routerLink: ['/'],
+        url:"https://kkumail-my.sharepoint.com/:b:/p/suchat_kl/EQ5OPSG03_tKvNflOhTiFZ8B6765KK9cEWOGQCtWX-emgQ",
+        target:"_blank",
+        queryParams: { 'title': this.mnuStr[7]["manual"],"target":"_blank" },
+        
+
+      },
+      {
         label: this.mnuStr[2]["upload"],
         icon: 'pi pi-upload',
         disabled: uploadFile,
@@ -328,6 +338,7 @@ export class MenuComponent {
     { "changepwd": "เปลี่ยนรหัสผ่าน" },
     { "resetpwd": "กำหนดรหัสผ่านใหม่" },
     {"uploadimg":"เตรียมไฟล์ลายเซ็นต์"},
+    {"manual":"คู่มือ"},
   ];
   ngOnInit() {
     this.showMenu();

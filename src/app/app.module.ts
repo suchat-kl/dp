@@ -29,7 +29,7 @@ import { ChangePwdComponent } from './change-pwd/change-pwd.component';
 import { ResetPwdComponent } from './reset-pwd/reset-pwd.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UploadImgComponent } from './upload-img/upload-img.component';
-
+// import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -57,7 +57,8 @@ import { UploadImgComponent } from './upload-img/upload-img.component';
     FontAwesomeModule,
     HttpClientModule,
     DialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // PdfViewerModule
   ],
   providers: [YtServiceService,UserService],
   bootstrap: [AppComponent]
