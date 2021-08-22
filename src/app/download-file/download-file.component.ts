@@ -14,7 +14,7 @@ export class DownloadFileComponent implements OnInit {
   display: boolean = false; msg_err: string = "";
   async onclick(value: any) {
     let body = { "id": sessionStorage.getItem("id") };
-    let url = "http://dbdoh.doh.go.th:9999/repYT/" + body["id"] + "?yt=" + this.yearTax;
+    let url = "http://backupdoh.doh.go.th:9999/repYT/" + body["id"] + "?yt=" + this.yearTax;
 
 
     let header = {
@@ -38,7 +38,7 @@ export class DownloadFileComponent implements OnInit {
           console.log(response);
           // console.log("success");
           //downloadFile
-         window.open("http://dbdoh.doh.go.th:9999/downloadRep/"+body["id"],"_blank");
+         window.open("http://backupdoh.doh.go.th:9999/downloadRep/"+body["id"],"_blank");
 
         });
 

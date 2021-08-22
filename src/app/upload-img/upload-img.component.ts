@@ -190,7 +190,7 @@ export class UploadImgComponent implements OnInit {
     // "base64": this.base64,
     // "yeartax": this.yearTax,
     if (!this.disableDelete) {
-      let url = "http://dbdoh.doh.go.th:9999/delImg/" + this.yearTax;//+"?file="+this.fileGloblal;
+      let url = "http://backupdoh.doh.go.th:9999/delImg/" + this.yearTax;//+"?file="+this.fileGloblal;
 
 
       let header = {
@@ -238,7 +238,7 @@ export class UploadImgComponent implements OnInit {
 
     if (!this.disableInsert) {
       // console.log(body);
-      let url = "http://dbdoh.doh.go.th:9999/uploadImg/"+ this.yearTax;
+      let url = "http://backupdoh.doh.go.th:9999/uploadImg/"+ this.yearTax;
       let header = {
         headers: new HttpHeaders()
           .set('Authorization', "Bearer " + sessionStorage.getItem("token"))

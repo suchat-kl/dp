@@ -51,7 +51,7 @@ export class ChangePwdComponent implements OnInit {
     }
     body["password"] = obj.password;
     console.log(body);
-    let url = 'http://dbdoh.doh.go.th:9999/changepwd/' + sessionStorage
+    let url = 'http://backupdoh.doh.go.th:9999/changepwd/' + sessionStorage
       .getItem('id');
     let header = {
       headers: new HttpHeaders()

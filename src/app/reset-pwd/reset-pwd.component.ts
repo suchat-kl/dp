@@ -44,7 +44,7 @@ export class ResetPwdComponent implements OnInit {
     let bd = obj.bd; //same value this.bd
     // let idcard=obj.idcard;
 
-    let url = "http://dbdoh.doh.go.th:9999/resetpwd/1?bd=" + bd;
+    let url = "http://backupdoh.doh.go.th:9999/resetpwd/1?bd=" + bd;
     await this.http.put(url, body).toPromise().
       then(response => {
         let data = JSON.stringify(response);
@@ -66,9 +66,9 @@ export class ResetPwdComponent implements OnInit {
 
     // let bodyJson=JSON.stringify(body);
     //console.log(bodyJson);
-    //http://dbdoh.doh.go.th:9999/resetpwd/3?bd=888888
+    //http://backupdoh.doh.go.th:9999/resetpwd/3?bd=888888
     /*
-    let url = 'http://dbdoh.doh.go.th:9999/resetpwd';
+    let url = 'http://backupdoh.doh.go.th:9999/resetpwd';
       this.http.post(url, body)
       .subscribe(response => {
         console.log(response);    

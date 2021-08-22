@@ -38,7 +38,7 @@ export class MenuComponent {
   // password="" ;
   display: boolean = false;
   data: any;
-  url: string = 'http://dbdoh.doh.go.th:9999/login';
+  url: string = 'http://backupdoh.doh.go.th:9999/login';
   loginJson = {
 
     "username": "",
@@ -166,7 +166,7 @@ export class MenuComponent {
     // this.token +=this.response["accessToken"];
 
 
-    this.url = 'http://dbdoh.doh.go.th:9999/user';
+    this.url = 'http://backupdoh.doh.go.th:9999/user';
     let header = {
       headers: new HttpHeaders()
         .set('Authorization', "Bearer " + sessionStorage.getItem("token")) //   this.response["accessToken"])

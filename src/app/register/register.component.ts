@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
     
    // let bodyJson=JSON.stringify(body);
     //console.log(bodyJson);
-    let url = 'http://dbdoh.doh.go.th:9999/register';// + sessionStorage.getItem('id');
+    let url = 'http://backupdoh.doh.go.th:9999/register';// + sessionStorage.getItem('id');
     // let header = {
     //   headers: new HttpHeaders()
     //     .set('Authorization', "Bearer " + sessionStorage.getItem("token"))
