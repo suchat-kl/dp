@@ -10,6 +10,7 @@ import { UserDetail } from '../user-detail';
 // import { faLongArrowAltUp } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
+import { YtServiceService } from '../yt-service.service';
 
 
 
@@ -36,9 +37,23 @@ export class MenuComponent {
   // title = 'ดาวน์โหลดเอกสารภาษีประจำปี';
   // userName:any;
   // password="" ;
+  cntRigis: number = 0;
+  _url: string = "";
+  ngOnInit() {
+    this.showMenu();
+    this._url = this.ytSv.url + '/cntRigister';
+    this.http.get(this._url)
+      .subscribe(response => {
+        //console.log(JSON.stringify(response));
+        let j = JSON.stringify(response);
+        // console.log(j);
+        sessionStorage.setItem("cntUsr", j);
+      });
+
+  }
   display: boolean = false;
   data: any;
-  url: string = 'http://backupdoh.doh.go.th:9999/login';
+  url: string = this.ytSv.url + '/login';
   loginJson = {
 
     "username": "",
@@ -47,7 +62,7 @@ export class MenuComponent {
   }
   // response!: LoginApi;
   constructor(private http: HttpClient, private route: Router, private usr: UserService
-  ) {
+    , private ytSv: YtServiceService) {
     if (sessionStorage.getItem('userName') == null) {
       sessionStorage.setItem('userName', '');
     }
@@ -70,6 +85,7 @@ export class MenuComponent {
 
   logOut() {
     this.passLogin = false;
+    sessionStorage.removeItem("cntUsr");
     sessionStorage.removeItem("userName");
     sessionStorage.removeItem("passLogin");
     sessionStorage.removeItem("mnuFileUpload");
@@ -97,7 +113,7 @@ export class MenuComponent {
 
     // console.log(JSON.stringify(value));
     this.data = JSON.stringify(value);
-   // console.log(this.data);
+    // console.log(this.data);
 
     // console.log(value["userName"]);
     // console.log(value["password"]);
@@ -166,7 +182,7 @@ export class MenuComponent {
     // this.token +=this.response["accessToken"];
 
 
-    this.url = 'http://backupdoh.doh.go.th:9999/user';
+    this.url = this.ytSv.url + '/user';
     let header = {
       headers: new HttpHeaders()
         .set('Authorization', "Bearer " + sessionStorage.getItem("token")) //   this.response["accessToken"])
@@ -254,17 +270,17 @@ export class MenuComponent {
         icon: 'pi pi-fw pi-bookmark',
         routerLink: ['/'],
         queryParams: { 'title': this.mnuStr[0]["index"] },
-        
+
 
       },
       {
         label: this.mnuStr[7]["manual"],
         icon: 'pi pi-fw pi-bookmark',
         // routerLink: ['/'],
-        url:"https://kkumail-my.sharepoint.com/:b:/p/suchat_kl/EQ5OPSG03_tKvNflOhTiFZ8B6765KK9cEWOGQCtWX-emgQ",
-        target:"_blank",
-        queryParams: { 'title': this.mnuStr[7]["manual"],"target":"_blank" },
-        
+        url: "https://kkumail-my.sharepoint.com/:b:/p/suchat_kl/EQ5OPSG03_tKvNflOhTiFZ8B6765KK9cEWOGQCtWX-emgQ",
+        target: "_blank",
+        queryParams: { 'title': this.mnuStr[7]["manual"], "target": "_blank" },
+
 
       },
       {
@@ -273,7 +289,7 @@ export class MenuComponent {
         disabled: uploadFile,
         routerLink: ['/uploadfile'],
         queryParams: { 'title': this.mnuStr[2]["upload"] },
-        
+
 
       },
       {
@@ -282,7 +298,7 @@ export class MenuComponent {
         disabled: uploadFile,
         routerLink: ['/uploadimg'],
         queryParams: { 'title': this.mnuStr[6]["uploadimg"] },
-        
+
 
       },
       {
@@ -337,11 +353,9 @@ export class MenuComponent {
     { "download": "ดาวน์โหลดไฟล์ภาษี" },
     { "changepwd": "เปลี่ยนรหัสผ่าน" },
     { "resetpwd": "กำหนดรหัสผ่านใหม่" },
-    {"uploadimg":"เตรียมไฟล์ลายเซ็นต์"},
-    {"manual":"คู่มือ"},
+    { "uploadimg": "เตรียมไฟล์ลายเซ็นต์" },
+    { "manual": "คู่มือ" },
   ];
-  ngOnInit() {
-    this.showMenu();
-  }
+
 }
 

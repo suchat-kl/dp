@@ -44,7 +44,7 @@ export class ResetPwdComponent implements OnInit {
     let bd = obj.bd; //same value this.bd
     // let idcard=obj.idcard;
 
-    let url = "http://backupdoh.doh.go.th:9999/resetpwd/1?bd=" + bd;
+    let url = this.ytSv.url+ "/resetpwd/1?bd=" + bd;
     await this.http.put(url, body).toPromise().
       then(response => {
         let data = JSON.stringify(response);

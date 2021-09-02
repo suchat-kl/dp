@@ -51,8 +51,8 @@ export class ChangePwdComponent implements OnInit {
     }
     body["password"] = obj.password;
     console.log(body);
-    let url = 'http://backupdoh.doh.go.th:9999/changepwd/' + sessionStorage
-      .getItem('id');
+    let url = this.ytSv.url + '/changepwd/' + sessionStorage.getItem('id');
+     //'http://backupdoh.doh.go.th:9999/changepwd/' + sessionStorage.getItem('id');
     let header = {
       headers: new HttpHeaders()
         .set('Authorization', "Bearer " + sessionStorage.getItem("token"))

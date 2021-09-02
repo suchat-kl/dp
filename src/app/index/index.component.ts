@@ -15,8 +15,10 @@ export class IndexComponent implements OnInit {
   constructor(private route: ActivatedRoute, private ytSv: YtServiceService) { }
 // token:string="";
 // doc:string="";
+cntUsr="";
   ngOnInit(): void {
     // this.doc = "https://kkumail-my.sharepoint.com/:b:/p/suchat_kl/EQ5OPSG03_tKvNflOhTiFZ8B6765KK9cEWOGQCtWX-emgQ";
+    this.cntUsr=sessionStorage.getItem("cntUsr")+"";
     this.route.queryParams
       .subscribe(params => {
         // console.log(params); // { orderby: "price" }

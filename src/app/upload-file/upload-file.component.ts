@@ -199,7 +199,7 @@ export class UploadFileComponent implements OnInit {
 
     }
     if (!this.disableDelete) {
-      let url = "http://backupdoh.doh.go.th:9999/delYT/" + this.yearTax;//+"?file="+this.fileGloblal;
+      let url =this.ytSv.url+ "/delYT/" + this.yearTax;//+"?file="+this.fileGloblal;
 
 
 
@@ -236,7 +236,7 @@ export class UploadFileComponent implements OnInit {
 
     if (!this.disableInsert) {
       // console.log(body);
-      let url = "http://backupdoh.doh.go.th:9999/insertTxt";
+      let url = this.ytSv.url+"/insertTxt";
 
       for (let i = 0; i < this.jsonOutputArr.length; i++) {
         this.jsonOutput = this.jsonOutputArr[i];
